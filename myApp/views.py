@@ -9,7 +9,10 @@ from rest_framework.pagination import PageNumberPagination
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from .models import User, Post, Comment
-from serializer import PostActionSerializer, PostSerializer, CommentActionSerializer
+from serializer import (PostActionSerializer,
+                        PostSerializer,
+                        CommentActionSerializer,
+                        CommentSerializer)
 
 
 ALLOWED_HOSTS = settings.ALLOWED_HOSTS
@@ -64,12 +67,12 @@ def action_comment_view(request):
         comment = Comment.objects.get(id=comment_id)
         if action == "like":
             comment.like()
-            new_ser = serializer.CommentSerializer(comment)
+            new_ser = CommentSerializer(comment)
             return Response(new_ser.data, status=200)
 
         elif action == "dislike":
             comment.dislike()
-            new_ser = serializer.CommentSerializer(comment)
+            new_ser = CommentSerializer(comment)
             return Response(new_ser.data, status=200)
 
         elif action == "delete":
