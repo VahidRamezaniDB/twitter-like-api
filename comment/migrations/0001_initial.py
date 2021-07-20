@@ -10,17 +10,20 @@ class Migration(migrations.Migration):
 
     dependencies = [
         ('user', '0001_initial'),
+        ('post', '0001_initial'),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Post',
+            name='Comment',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('content', models.TextField()),
                 ('date', models.DateField()),
                 ('likes', models.IntegerField(default=0, null=True)),
                 ('disLikes', models.IntegerField(default=0, null=True)),
+                ('upperComment', models.ForeignKey(default=None, null=True, on_delete=django.db.models.deletion.CASCADE, to='comment.comment')),
+                ('upperPost', models.ForeignKey(default=None, null=True, on_delete=django.db.models.deletion.CASCADE, to='post.post')),
                 ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='user.user')),
             ],
         ),

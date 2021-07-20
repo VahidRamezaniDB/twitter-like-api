@@ -10,7 +10,7 @@ class Post(models.Model):
     disLikes = models.IntegerField(null=True, default=0)
 
     def __str__(self):
-        return self.content[:15]
+        return self.content[:15]+'...'
 
     def like(self):
         self.likes += 1
