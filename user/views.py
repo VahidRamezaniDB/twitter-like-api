@@ -22,7 +22,7 @@ def login_views(req):
             if len(posts) == 0:
                 return Response(status=status.HTTP_204_NO_CONTENT)
             ser_posts = PostSerializer(posts, many=True)
-            return Response(ser_posts.data, status=status.HTTP_200_OK)
+            return Response(ser_posts.data, status=status.HTTP_202_ACCEPTED)
     return Response({"error": "username or password is incorrect"}, status=status.HTTP_403_FORBIDDEN)
 
 
