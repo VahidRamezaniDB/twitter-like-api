@@ -46,3 +46,11 @@ class UserView(APIView):
         else:
             return Response({"error": "not valid arguments"}, status=status.HTTP_400_BAD_REQUEST)
 
+    @staticmethod
+    def delete(req, pk):
+        user = User.objects.filter(pk=pk)
+        if len(user) == 0:
+            return Response({"error": "Not Found!"}, status=status.HTTP_404_NOT_FOUND)
+        user = user[0]
+        user.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
